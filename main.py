@@ -6,8 +6,12 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"isekai": "Kono Subarashi ni sekai shukufuku wo"}
 
-@app.get("/characters")
+@app.get("/characters", summary="Get All Characters")
 async def get_chars():
-    return dict(characters=get_characters())
+    all_chars = get_characters()
+    if len(all_chars) < 1:
+        return dict(characters=[])
+    else:
+        return dict(characters=[x['character'] for x in all_chars])

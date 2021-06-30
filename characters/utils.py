@@ -19,10 +19,10 @@ def get_characters():
             fchars_content = req.text
             fchars_soup = BeautifulSoup(fchars_content, features="html5lib")
             charmembers = fchars_soup.find_all("li", "category-page__member")
-            print([cm.find('a', 'category-page__member-link')['href'] for cm in charmembers])
-            return list(filter(lambda x: not x.startswith("Category"),[cm.find('a', 'category-page__member-link').text for cm in charmembers]))
+            # print(list(filter(lambda x: not x['character'].startswith("Category"),[dict(character=cm.find('a', 'category-page__member-link').text, link=cm.find('a', 'category-page__member-link')['href']) for cm in charmembers])))
+            return list(filter(lambda x: not x['character'].startswith("Category"),[dict(character=cm.find('a', 'category-page__member-link').text, link=cm.find('a', 'category-page__member-link')['href']) for cm in charmembers]))
     except Exception as e:
         print("Oops! Something went wrong. Please try again.")
         return []
 
-get_characters()
+# get_characters()
